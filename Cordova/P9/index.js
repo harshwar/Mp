@@ -1,10 +1,7 @@
-var app = {
-  initialize: function() {
-    document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-  },
-  onDeviceReady: function() {
-    console.log('cordova running');
+function onDeviceReady() {
+    console.log('Device is ready');
     alert('Hello World Harshwardhan KCTYBSCIT06');
-  }
-};
-app.initialize();
+}
+
+// Wait for Cordova to connect with the device
+document.addEventListener('deviceready', onDeviceReady, false);
