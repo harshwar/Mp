@@ -1,26 +1,17 @@
-var app = {
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
-    onDeviceReady: function() {
-        console.log('Cordova is running');
-        var btn = document.getElementById("loadBtn");
-        if (btn) {
-            btn.addEventListener("click", this.loadData);
+function onDeviceReady() {
+    document.getElementById('loadDataBtn').addEventListener('click', loadData);
+}
+
+function loadData() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            document.getElementById('output').innerHTML = data.message;
         }
-    },
-    loadData: function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "data.json", true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log("Raw response:", xhr.responseText);
-                var res = JSON.parse(xhr.responseText);
-                console.log("Parsed object:", res);
-                document.getElementById("output").innerHTML = res.message;
-            }
-        };
-        xhr.send();
-    }
-};
-app.initialize();
+    };
+    xhr.open("GET", "data.json", true);
+    xhr.send();
+}
+
+document.addEventListener('deviceready', onDeviceReady, false);
