@@ -4,73 +4,63 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
 
         <EditText
-            android:id="@+id/idInput"
-            android:hint="Enter ID (for Update/Delete)"
-            android:inputType="number"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:padding="12dp"/>
+            android:hint="Username" />
 
         <EditText
-            android:id="@+id/nameInput"
-            android:hint="Enter Name"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:padding="12dp"/>
+            android:layout_marginTop="16dp"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/marksInput"
-            android:hint="Enter Marks"
-            android:inputType="number"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:padding="12dp"/>
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/addBtn"
-            android:text="Add Student"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"/>
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Register"
+                android:layout_marginEnd="8dp"/>
 
-        <Button
-            android:id="@+id/updateBtn"
-            android:text="Update Student"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"/>
-
-        <Button
-            android:id="@+id/deleteBtn"
-            android:text="Delete Student"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"/>
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Login"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
 
         <Button
-            android:id="@+id/viewBtn"
-            android:text="View All Students"
+            android:id="@+id/btnViewAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"/>
+            android:text="View All Users"
+            android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/resultView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
-            android:paddingTop="20dp"
-            android:layout_marginTop="15dp"/>
+            android:text="Registered users will be shown here..."/>
 
     </LinearLayout>
 </ScrollView>
