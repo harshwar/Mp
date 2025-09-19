@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Student Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card *ngIf="student">
+    <ion-card-header>
+      <ion-card-title>Registration Successful!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><b>Name:</b> {{ student.name }}</p>
+      <p><b>Email:</b> {{ student.email }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

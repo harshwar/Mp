@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Student Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Full Name</ion-label>
+    <ion-input [(ngModel)]="student.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Email</ion-label>
+    <ion-input type="email" [(ngModel)]="student.email"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="submit()" class="ion-margin-top">Register</ion-button>
+</ion-content>
