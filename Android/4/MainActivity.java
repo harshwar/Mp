@@ -1,105 +1,83 @@
-package com.example.practical8; // Your package name
+package com.example.practical8;
 
-import android.database.Cursor;
+import android.database.Cursor; // Import Cursor
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.TextView; // Import TextView
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-    Database db;
-    EditText idInput, nameInput, marksInput;
-    Button addBtn, updateBtn, deleteBtn, viewBtn;
-    TextView resultView;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize the database helper
-        db = new Database(this);
+        EditText username = findViewById(R.id.username);
+        EditText password = findViewById(R.id.password);
+        Button btnRegister = findViewById(R.id.btnRegister);
+        Button btnLogin = findViewById(R.id.btnLogin);
+        DB = new DBHelper(this);
 
-        // Link Java variables to the UI elements in the XML
-        idInput = findViewById(R.id.idInput);
-        nameInput = findViewById(R.id.nameInput);
-        marksInput = findViewById(R.id.marksInput);
-        addBtn = findViewById(R.id.addBtn);
-        updateBtn = findViewById(R.id.updateBtn);
-        deleteBtn = findViewById(R.id.deleteBtn);
-        viewBtn = findViewById(R.id.viewBtn);
-        resultView = findViewById(R.id.resultView);
+        // --- New Views Initialized ---
+        Button btnViewAll = findViewById(R.id.btnViewAll);
+        TextView resultView = findViewById(R.id.resultView);
 
-        // Set the action for the "Add" button
-        addBtn.setOnClickListener(v -> {
-            String name = nameInput.getText().toString().trim();
-            String marksStr = marksInput.getText().toString().trim();
 
-            if (name.isEmpty() || marksStr.isEmpty()) {
-                Toast.makeText(this, "Please enter name and marks", Toast.LENGTH_SHORT).show();
+        btnRegister.setOnClickListener(v -> {
+            String user = username.getText().toString();
+            String pass = password.getText().toString();
+
+            if (user.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
-            int marks = Integer.parseInt(marksStr);
-            if (db.insertStudent(name, marks)) {
-                Toast.makeText(this, "Inserted Successfully", Toast.LENGTH_SHORT).show();
+            if (DB.checkUsername(user)) {
+                Toast.makeText(this, "User already exists!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Insert Failed", Toast.LENGTH_SHORT).show();
+                DB.insertData(user, pass);
+                Toast.makeText(this, "Registered successfully", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Set the action for the "Update" button
-        updateBtn.setOnClickListener(v -> {
-            String idStr = idInput.getText().toString().trim();
-            String name = nameInput.getText().toString().trim();
-            String marksStr = marksInput.getText().toString().trim();
+        btnLogin.setOnClickListener(v -> {
+            String user = username.getText().toString();
+            String pass = password.getText().toString();
 
-            if (idStr.isEmpty() || name.isEmpty() || marksStr.isEmpty()) {
-                Toast.makeText(this, "Enter ID, new name, and new marks", Toast.LENGTH_SHORT).show();
+            if (user.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
-            int id = Integer.parseInt(idStr);
-            int marks = Integer.parseInt(marksStr);
-            if (db.updateStudent(id, name, marks)) {
-                Toast.makeText(this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+            if (DB.checkUsernamePassword(user, pass)) {
+                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Update Failed. ID not found.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Set the action for the "Delete" button
-        deleteBtn.setOnClickListener(v -> {
-            String idStr = idInput.getText().toString().trim();
-            if (idStr.isEmpty()) {
-                Toast.makeText(this, "Enter ID to delete", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            int id = Integer.parseInt(idStr);
-            if (db.deleteStudent(id)) {
-                Toast.makeText(this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Delete Failed. ID not found.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Set the action for the "View" button
-        viewBtn.setOnClickListener(v -> {
-            Cursor cursor = db.getAllStudents();
+        // --- New OnClickListener for the View All Button ---
+        btnViewAll.setOnClickListener(v -> {
+            Cursor cursor = DB.getAllUsers();
             if (cursor.getCount() == 0) {
-                resultView.setText("No students found.");
+                resultView.setText("No users found.");
                 return;
             }
-            StringBuilder sb = new StringBuilder();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Registered Users:\n\n");
+
+            // Loop through all the rows from the database
             while (cursor.moveToNext()) {
-                // We get data by column index: 0 for ID, 1 for Name, 2 for Marks
-                sb.append("ID: ").append(cursor.getInt(0))
-                        .append(", Name: ").append(cursor.getString(1))
-                        .append(", Marks: ").append(cursor.getInt(2))
-                        .append("\n");
+                // Column 0 is "username", Column 1 is "password"
+                stringBuilder.append("Username: ").append(cursor.getString(0)).append("\n");
             }
-            resultView.setText(sb.toString());
+            cursor.close(); // IMPORTANT: Always close the cursor when you're done.
+
+            // Set the final text to the TextView
+            resultView.setText(stringBuilder.toString());
         });
     }
 }
