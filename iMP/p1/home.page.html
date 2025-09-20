@@ -1,9 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Hello World App</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<!-- <ion-header><ion-toolbar><ion-title>Enter Your Details</ion-title></ion-toolbar></ion-header>
 <ion-content class="ion-padding">
-  <h1>Hello World!</h1>
+ <ion-item>
+ <ion-label position="floating">Name</ion-label>
+ <ion-input [(ngModel)]="name"></ion-input>
+ </ion-item>
+ <ion-item>
+ <ion-label position="floating">Date of Birth</ion-label>
+ <ion-input type="date" [(ngModel)]="dob"></ion-input>
+ </ion-item>
+ <ion-item>
+ <ion-label position="floating">City</ion-label>
+ <ion-input [(ngModel)]="city"></ion-input>
+ </ion-item>
+ <ion-item>
+ <ion-label>Gender</ion-label>
+ <ion-select [(ngModel)]="gender">
+ <ion-select-option value="Male">Male</ion-select-option>
+ <ion-select-option value="Female">Female</ion-select-option>
+ <ion-select-option value="Other">Other</ion-select-option>
+ </ion-select>
+ </ion-item>
+<ion-item>
+ <ion-label position="floating">Hobby</ion-label>
+ <ion-input [(ngModel)]="hobby"></ion-input>
+ </ion-item>
+ <ion-button expand="block" class="ion-margin-top" (click)="submit()">Submit</ion-button>
+</ion-content> -->
+<ion-header>
+ <ion-toolbar>
+ <ion-title>
+ User Form & Counter
+ </ion-title>
+ </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+ <ion-item>
+ <ion-label position="floating">Name</ion-label>
+ <ion-input [(ngModel)]="name"></ion-input>
+ </ion-item>
+ <ion-item>
+ <ion-label position="floating">Email</ion-label>
+ <ion-input [(ngModel)]="email" type="email"></ion-input>
+ </ion-item>
+ <ion-button expand="full" (click)="submit()">Submit</ion-button>
+ <div *ngIf="submitted">
+<p>Name: {{ name }}</p>
+ <p>Email: {{ email }}</p>
+ </div>
+ <ion-card>
+ <ion-card-header>
+ Counter: {{ counter }}
+ </ion-card-header>
+ <ion-card-content>
+ <ion-button (click)="increment()">Increment</ion-button>
+ <ion-button (click)="decrement()">Decrement</ion-button>
+ </ion-card-content>
+ </ion-card>
 </ion-content>
