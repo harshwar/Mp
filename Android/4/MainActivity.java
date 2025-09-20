@@ -1,10 +1,10 @@
 package com.example.practical8;
 
-import android.database.Cursor; // Import Cursor
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView; // Import TextView
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.btnLogin);
         DB = new DBHelper(this);
 
-        // --- New Views Initialized ---
+        
         Button btnViewAll = findViewById(R.id.btnViewAll);
         TextView resultView = findViewById(R.id.resultView);
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // --- New OnClickListener for the View All Button ---
+        
         btnViewAll.setOnClickListener(v -> {
             Cursor cursor = DB.getAllUsers();
             if (cursor.getCount() == 0) {
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
             cursor.close(); // IMPORTANT: Always close the cursor when you're done.
 
-            // Set the final text to the TextView
             resultView.setText(stringBuilder.toString());
         });
     }
