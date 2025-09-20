@@ -1,16 +1,20 @@
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Dashboard</ion-title>
-  </ion-toolbar>
+ <ion-toolbar color="primary">
+ <ion-title>Student Details</ion-title>
+ </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Welcome, {{ user }}!</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Login was successful.
-    </ion-card-content>
-  </ion-card>
+ <ion-card>
+ <ion-card-header>
+ <ion-card-title>Submitted Info</ion-card-title>
+ </ion-card-header>
+ <ion-card-content>
+ <p><b>Name:</b> {{ name }}</p>
+ <p><b>Email:</b> {{ email }}</p>
+ <p><b>DOB:</b> {{ dob | date }}</p>
+ <p><b>City:</b> {{ city }}</p>
+ <p><b>Gender:</b> {{ gender }}</p>
+ <p><b>Hobbies:</b> {{ hobbyList }}</p>
+ </ion-card-content>
+ </ion-card>
 </ion-content>
