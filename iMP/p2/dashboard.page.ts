@@ -9,7 +9,7 @@ export class DashboardPage {
   user: string;
 
   constructor(private router: Router) {
-    // Simplified way to get navigation state
+    
     const nav = this.router.getCurrentNavigation();
     this.user = nav?.extras?.state?.['user'] || 'Guest';
   }
