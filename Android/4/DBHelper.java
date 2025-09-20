@@ -43,10 +43,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return match;
     }
 
-    // New Method Added
     public Cursor getAllUsers() {
         SQLiteDatabase myDB = this.getReadableDatabase();
-        // The rawQuery method returns a Cursor object with all the results
+        
         return myDB.rawQuery("SELECT * FROM users", null);
     }
 }
