@@ -11,7 +11,7 @@ export class RegisterPage {
   constructor(private router: Router) {}
 
   submit() {
-    // Navigate and pass the whole student object
+    
     this.router.navigate(['/student-details'], { state: { studentData: this.student } });
   }
 }
