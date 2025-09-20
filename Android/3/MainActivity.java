@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button nextPageButton = findViewById(R.id.nextPageBtn);
         nextPageButton.setOnClickListener(v -> {
-            // Create an Intent to go to SecondActivity
+            
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             startActivity(intent);
         });
